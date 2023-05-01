@@ -12,7 +12,7 @@ class Feedback extends Component {
             neutral: 0,
             bad: 0
         };
-      }
+    }
 
     addGoodFeedback = () => {
         this.setState(prevState => {
@@ -40,6 +40,17 @@ class Feedback extends Component {
             }
         )
     }
+
+    countTotalFeedback = () => {
+        return this.state.good + this.state.neutral + this.state.bad;
+    }
+
+    countPositiveFeedbackPercentage = () => {
+        if (this.state.good + this.state.neutral + this.state.bad === 0) {
+            return 0;
+        }
+        return Math.round(this.state.good / (this.state.good + this.state.neutral + this.state.bad) * 100);
+    }
     
     render = () => {
         const { good, neutral, bad } = this.state;
@@ -57,6 +68,8 @@ class Feedback extends Component {
                 <p className={css.message}>Good: {good}</p>
                 <p className={css.message}>Neutral: {neutral}</p>
                 <p className={css.message}>Bad: {bad}</p>
+                <p className={css.message}>Total: {this.countTotalFeedback()}</p>
+                <p className={css.message}>Positive feedback: {this.countPositiveFeedbackPercentage()}%</p>
 
             </div>
         </div>
