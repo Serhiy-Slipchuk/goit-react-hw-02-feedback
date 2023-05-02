@@ -2,6 +2,7 @@ import css from './Section.module.scss'
 import PropTypes from 'prop-types'
 import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions'
 import Statistics from 'components/Statistics/Statistics'
+import Notification from 'components/Notification/Notification'
 
 const Section = function ({ title, statistics, options }) {
     return (
@@ -10,7 +11,8 @@ const Section = function ({ title, statistics, options }) {
             <h2 className={css.text}>Please leave feedback</h2>
             <FeedbackOptions options={options} />
             <h2 className={css.text}>Statistics</h2>
-            <Statistics statistics={statistics} />
+            {statistics.total() === 0 ?
+             <Notification message="There is no feedback"/> : <Statistics statistics={statistics}/>}
         </div>
     )
 }
